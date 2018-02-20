@@ -68,9 +68,7 @@ android {
         main {
             manifest.srcFile 'AndroidManifest.xml'
             java.srcDirs = [
-                    'src',
-                    'core/src',
-                    'modules/google-cast/src',
+                    'src'
             ]
             resources.srcDirs = ['src']
             aidl.srcDirs = ['src']
@@ -80,8 +78,7 @@ android {
         }
         test {
             java.srcDirs = [
-                    'core/test/src',
-                    'modules/google-cast/test/src'
+                    'test/src'
             ]
         }
     }
@@ -100,8 +97,8 @@ android.testOptions.unitTests.all {
 }
 
 dependencies {
-    compile files('core/libs/java-websocket-patch.jar')
-    compile files('core/libs/javax.jmdns_3.4.1-patch2.jar')
+    compile files('libs/java-websocket-patch.jar')
+    compile files('libs/javax.jmdns_3.4.1-patch2.jar')
 
     compile 'com.android.support:support-v4:24.2.1'
     compile 'com.android.support:appcompat-v7:24.2.1'
