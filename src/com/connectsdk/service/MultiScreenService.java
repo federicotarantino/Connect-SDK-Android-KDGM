@@ -60,27 +60,7 @@ public class MultiScreenService extends DeviceService implements MediaPlayer, Me
   public MultiScreenService(ServiceDescription serviceDescription, ServiceConfig serviceConfig) {
     super(serviceDescription, serviceConfig);
 
-    System.out.println("############ "+serviceDescription.getLocationXML());
-    System.out.println("############ IP "+serviceDescription.getIpAddress());
-    System.out.println("############ PORT "+serviceDescription.getPort());
-    System.out.println("############ "+serviceDescription.getApplicationURL());
-    System.out.println("############ "+serviceDescription);
-
-    if(serviceDescription.getLocationXML()!=null && serviceDescription.getLocationXML().contains("samsung:multiscreen:1")) {
-      String uriString = "http://" + serviceDescription.getIpAddress() + ":8001/api/v2/";
-      Service.getByURI(Uri.parse(uriString), new Result<Service>() {
-        @Override
-        public void onSuccess(Service fservice) {
-          System.out.println("############ ONSUCCESS");
-          service = fservice;
-        }
-
-        @Override
-        public void onError(Error error) {
-          System.out.println("############ ONERROR");
-        }
-      });
-    } //else throw new Exception();
+    service = (Service) serviceDescription.getDevice();
 
   }
 
@@ -375,14 +355,10 @@ public class MultiScreenService extends DeviceService implements MediaPlayer, Me
                         String description, String iconSrc, boolean shouldLoop,
                         final LaunchListener listener) {
 
-    System.out.println("############ URL "+url);
-
     if(app!=null){
-      System.out.println("############ APP OK "+url);
       app.playContent(Uri.parse(url), title, Uri.parse(iconSrc), new Result<Boolean>() {
         @Override
         public void onSuccess(Boolean aBoolean) {
-          System.out.println("############ PLAY SUCCESS");
           LaunchSession launchSession = LaunchSession.launchSessionForAppId("IPTVCast");
           launchSession.setService(MultiScreenService.this);
           launchSession.setSessionId(service.getId());
@@ -392,7 +368,6 @@ public class MultiScreenService extends DeviceService implements MediaPlayer, Me
 
         @Override
         public void onError(Error error) {
-          System.out.println("############ PLAY ERROR "+error.getMessage()+" "+error.getName());
           Util.postError(listener, ServiceCommandError.getError((int) error.getCode()));
         }
       });
