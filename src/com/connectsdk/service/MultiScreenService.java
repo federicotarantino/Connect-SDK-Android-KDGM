@@ -244,8 +244,10 @@ public class MultiScreenService extends DeviceService implements MediaPlayer, Me
 
   @Override
   public void disconnect() {
-    app.disconnect();
-    app = null;
+    if(app!=null) {
+      app.disconnect();
+      app = null;
+    }
   }
 
   @Override
