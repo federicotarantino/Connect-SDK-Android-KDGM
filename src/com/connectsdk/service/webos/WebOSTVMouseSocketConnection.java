@@ -1,10 +1,10 @@
 /*
  * WebOSTVMouseSocketConnection
  * Connect SDK
- * 
+ *
  * Copyright (c) 2014 LG Electronics.
  * Created by Hyun Kook Khang on 19 Jan 2014
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -56,7 +56,7 @@ public class WebOSTVMouseSocketConnection {
     public WebOSTVMouseSocketConnection(String socketPath, WebOSTVMouseSocketListener listener) {
         Log.d("PtrAndKeyboardFragment", "got socketPath: " + socketPath);
 
-        this.listener = listener; 
+        this.listener = listener;
         this.socketPath = socketPath;
 
         try {
@@ -124,7 +124,7 @@ public class WebOSTVMouseSocketConnection {
     }
 
     public boolean isConnected() {
-        if (ws == null) 
+        if (ws == null)
             System.out.println("ws is null");
         else if (ws.getReadyState() != READYSTATE.OPEN) {
             System.out.println("ws state is not ready");
@@ -139,7 +139,7 @@ public class WebOSTVMouseSocketConnection {
     }
 
     public void button(ButtonType type) {
-        String keyName; 
+        String keyName;
         switch (type) {
         case HOME:
             keyName = "HOME";
